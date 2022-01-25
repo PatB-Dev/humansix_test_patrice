@@ -16,7 +16,13 @@ class ConnexionController extends AbstractController
     public function index(AuthenticationUtils $authenticationUtils): Response
     {
         $loginForm = $this->createForm(LoginUserType::class);
-        return $this->render('security/login.html.twig', [
-            'loginForm' => $loginForm->createView()]);
+
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/connexion.html.twig',
+            ['last_username' => $lastUsername, 'error' => $error, 'loginForm' => $loginForm->createView()]);
     }
 }
