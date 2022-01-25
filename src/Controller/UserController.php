@@ -16,8 +16,12 @@ class UserController extends AbstractController
      */
     public function index(): Response
     {
-        //$user = $this->getUser();
-
-        return $this->render('user/index.html.twig');
+        //Check user connecté
+        $user = $this->getUser();
+        if($user){
+            return $this->render('user/index.html.twig');
+        }
+        //Si non connecté retour à la page de connexion
+        return $this->redirectToRoute('app_login');
     }
 }
