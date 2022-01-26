@@ -22,6 +22,13 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+/***********PRODUCTS************/
+        //charge le fichier sql pour insertion des produits
+        $sql = file_get_contents(__DIR__ . '/insert_products.sql');
+        $stmt = $manager->getConnection()->prepare($sql);
+        $stmt->execute();
+/***********PRODUCTS FIN************/
+
 /***********USERS************/
         //on crée un admin
         $user = new User();
@@ -67,46 +74,6 @@ class AppFixtures extends Fixture
 
 /***********USERS FIN************/
 
-/***********PRODUCTS************/
-        //Création du Product1
-        $product = new Product();
-        $product->setSku('ref1');
-        $product->setName('Product1');
-        $product->setQuantity('10');
-        $product->setPrice(14.00);
-        //on sauvegarde en bdd tout de suite
-        $manager->persist($product);
-
-        //Création du Product2
-        $product = new Product();
-        $product->setSku('ref2');
-        $product->setName('Product2');
-        $product->setQuantity('10');
-        $product->setPrice(10.00);
-        //on sauvegarde en bdd tout de suite
-        $manager->persist($product);
-
-        //Création du Product3
-        $product = new Product();
-        $product->setSku('ref3');
-        $product->setName('Product3');
-        $product->setQuantity('10');
-        $product->setPrice(15.00);
-        //on sauvegarde en bdd tout de suite
-        $manager->persist($product);
-
-        //Création du Product4
-        $product = new Product();
-        $product->setSku('ref4');
-        $product->setName('Product4');
-        $product->setQuantity('10');
-        $product->setPrice(20.00);
-
-        //on sauvegarde en bdd tout de suite
-        $manager->persist($product);
-        $manager->flush();
-/***********PRODUCTS FIN************/
-
 /***********ORDERS FIN************/
 
         //Création des status des commandes
@@ -118,11 +85,6 @@ class AppFixtures extends Fixture
         $order_status->setName('canceled');
         $manager->persist($order_status);
         $manager->flush();
-
-        //Création des commandes fictives
-        $order = new Order();
-        $order->setUserId( User, 1);
-        $order->setDate('2019-09-02');
 
 /***********ORDERS FIN************/
 
