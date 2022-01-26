@@ -8,6 +8,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+//Dans le terminal : php bin/console doctrine:fixtures:load
 class AppFixtures extends Fixture
 {
 
@@ -23,6 +24,8 @@ class AppFixtures extends Fixture
         //on crée un admin
         $user = new User();
         $user->setUsername('admin');
+        $user->setFirstName('admin');
+        $user->setLastName('admin');
         // encodePassword => hash du mot de passe
         $user->setPassword($this->encoder->encodePassword($user, 'S3cr3T+'));
 
