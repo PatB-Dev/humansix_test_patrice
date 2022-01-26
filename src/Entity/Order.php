@@ -31,6 +31,11 @@ class Order
      */
     private $product_id;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
     public function __construct()
     {
         $this->product_id = new ArrayCollection();
@@ -73,6 +78,18 @@ class Order
     public function removeProductId(Product $productId): self
     {
         $this->product_id->removeElement($productId);
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Order;
+use App\Entity\OrderStatus;
 use App\Entity\Product;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -104,6 +106,25 @@ class AppFixtures extends Fixture
         $manager->persist($product);
         $manager->flush();
 /***********PRODUCTS FIN************/
+
+/***********ORDERS FIN************/
+
+        //Création des status des commandes
+        $order_status = new OrderStatus();
+        $order_status->setName('processing');
+        $manager->persist($order_status);
+
+        $order_status = new OrderStatus();
+        $order_status->setName('canceled');
+        $manager->persist($order_status);
+        $manager->flush();
+
+        //Création des commandes fictives
+        $order = new Order();
+        $order->setUserId( User, 1);
+        $order->setDate('2019-09-02');
+
+/***********ORDERS FIN************/
 
     }
 }
