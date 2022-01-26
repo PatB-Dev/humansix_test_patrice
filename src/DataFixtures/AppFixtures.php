@@ -20,7 +20,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-
+/***********USERS************/
         //on crée un admin
         $user = new User();
         $user->setUsername('admin');
@@ -28,21 +28,52 @@ class AppFixtures extends Fixture
         $user->setLastName('admin');
         // encodePassword => hash du mot de passe
         $user->setPassword($this->encoder->encodePassword($user, 'S3cr3T+'));
-
         //on sauvegarde en bdd tout de suite
         $manager->persist($user);
+
+        //Création de John Dow
+        $user = new User();
+        $user->setUsername('John1');
+        $user->setFirstName('John');
+        $user->setLastName('Dow');
+        // encodePassword => hash du mot de passe
+        $user->setPassword($this->encoder->encodePassword($user, 'test'));
+        //on sauvegarde en bdd tout de suite
+        $manager->persist($user);
+
+        //Création de Walter White
+        $user = new User();
+        $user->setUsername('Walter');
+        $user->setFirstName('Walter');
+        $user->setLastName('White');
+        // encodePassword => hash du mot de passe
+        $user->setPassword($this->encoder->encodePassword($user, 'test'));
+        //on sauvegarde en bdd tout de suite
+        $manager->persist($user);
+
+        //Création de John Snow
+        $user = new User();
+        $user->setUsername('John2');
+        $user->setFirstName('John');
+        $user->setLastName('Snow');
+        // encodePassword => hash du mot de passe
+        $user->setPassword($this->encoder->encodePassword($user, 'test'));
+        //on sauvegarde en bdd tout de suite
+        $manager->persist($user);
+
         $manager->flush();
 
+/***********USERS FIN************/
+
+/***********PRODUCTS************/
         //Création du Product1
         $product = new Product();
         $product->setSku('ref1');
         $product->setName('Product1');
         $product->setQuantity('10');
         $product->setPrice(14.00);
-
         //on sauvegarde en bdd tout de suite
         $manager->persist($product);
-        $manager->flush();
 
         //Création du Product2
         $product = new Product();
@@ -50,10 +81,8 @@ class AppFixtures extends Fixture
         $product->setName('Product2');
         $product->setQuantity('10');
         $product->setPrice(10.00);
-
         //on sauvegarde en bdd tout de suite
         $manager->persist($product);
-        $manager->flush();
 
         //Création du Product3
         $product = new Product();
@@ -61,10 +90,8 @@ class AppFixtures extends Fixture
         $product->setName('Product3');
         $product->setQuantity('10');
         $product->setPrice(15.00);
-
         //on sauvegarde en bdd tout de suite
         $manager->persist($product);
-        $manager->flush();
 
         //Création du Product4
         $product = new Product();
@@ -76,6 +103,7 @@ class AppFixtures extends Fixture
         //on sauvegarde en bdd tout de suite
         $manager->persist($product);
         $manager->flush();
+/***********PRODUCTS FIN************/
 
     }
 }
