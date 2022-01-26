@@ -31,14 +31,10 @@ class Orders
     private $date;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrderStatus::class, mappedBy="orders")
+     * @ORM\ManyToOne(targetEntity=OrderStatus::class)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $status;
-
-    public function __construct()
-    {
-        $this->status = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -69,33 +65,18 @@ class Orders
         return $this;
     }
 
-    /**
-     * @return Collection|OrderStatus[]
-     */
-    public function getStatus(): Collection
+    public function getStatus(): ?OrderStatus
     {
         return $this->status;
     }
 
-    public function addStatus(OrderStatus $status): self
+    public function setStatus(?OrderStatus $status): self
     {
-        if (!$this->status->contains($status)) {
-            $this->status[] = $status;
-            $status->setOrders($this);
-        }
+        $this->status = $status;
 
         return $this;
     }
 
-    public function removeStatus(OrderStatus $status): self
-    {
-        if ($this->status->removeElement($status)) {
-            // set the owning side to null (unless already changed)
-            if ($status->getOrders() === $this) {
-                $status->setOrders(null);
-            }
-        }
 
-        return $this;
-    }
+
 }
