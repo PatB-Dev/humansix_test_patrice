@@ -75,7 +75,6 @@ class AppFixtures extends Fixture
 /***********USERS FIN************/
 
 /***********ORDERS FIN************/
-
         //Création des status des commandes
         $order_status = new OrderStatus();
         $order_status->setName('processing');
@@ -86,6 +85,15 @@ class AppFixtures extends Fixture
         $manager->persist($order_status);
         $manager->flush();
 
+        //Création des commandes fictives
+        $order = new Orders();
+        $user = $manager->getRepository(User::class);
+        $status = $manager->getRepository(OrderStatus::class);
+        $order->setUserId($user->find(1));
+        $order->setStatus($status->find(1));
+        $order->setDate(new \DateTime('2019-09-02 18:23:32'));
+        $manager->persist($order);
+        $manager->flush();
 /***********ORDERS FIN************/
 
     }
