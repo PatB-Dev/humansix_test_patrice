@@ -22,6 +22,11 @@ class OrderStatus
      */
     private $name;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Orders::class, inversedBy="status")
+     */
+    private $orders;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -38,4 +43,17 @@ class OrderStatus
 
         return $this;
     }
+
+    public function getOrders(): ?Orders
+    {
+        return $this->orders;
+    }
+
+    public function setOrders(?Orders $orders): self
+    {
+        $this->orders = $orders;
+
+        return $this;
+    }
+
 }

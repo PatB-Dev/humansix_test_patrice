@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Order;
+use App\Entity\Orders;
 use App\Entity\OrderStatus;
 use App\Entity\Product;
 use App\Entity\User;
