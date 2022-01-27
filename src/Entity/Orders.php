@@ -37,14 +37,10 @@ class Orders
     private $status;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Product::class)
+     * @ORM\OneToOne(targetEntity=Product::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $products;
-
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-    }
+    private ?Product $productsId;
 
     public function getId(): ?int
     {
@@ -87,30 +83,16 @@ class Orders
         return $this;
     }
 
-    /**
-     * @return Collection|Product[]
-     */
-    public function getProducts(): Collection
+    public function getProductsId(): ?Product
     {
-        return $this->products;
+        return $this->productsId;
     }
 
-    public function addProduct(Product $product): self
+    public function setProductsId(Product $productsId): self
     {
-        if (!$this->products->contains($product)) {
-            $this->products[] = $product;
-        }
+        $this->productsId = $productsId;
 
         return $this;
     }
-
-    public function removeProduct(Product $product): self
-    {
-        $this->products->removeElement($product);
-
-        return $this;
-    }
-
-
 
 }

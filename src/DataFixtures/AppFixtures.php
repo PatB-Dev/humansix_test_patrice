@@ -30,16 +30,6 @@ class AppFixtures extends Fixture
 /***********PRODUCTS FIN************/
 
 /***********USERS************/
-        //on crée un admin
-        $user = new User();
-        $user->setUsername('admin');
-        $user->setFirstName('admin');
-        $user->setLastName('admin');
-        // encodePassword => hash du mot de passe
-        $user->setPassword($this->encoder->encodePassword($user, 'S3cr3T+'));
-        //on sauvegarde en bdd tout de suite
-        $manager->persist($user);
-
         //Création de John Dow
         $user = new User();
         $user->setUsername('John1');
@@ -70,6 +60,16 @@ class AppFixtures extends Fixture
         //on sauvegarde en bdd tout de suite
         $manager->persist($user);
 
+        //Création de l'admin
+        $user = new User();
+        $user->setUsername('admin');
+        $user->setFirstName('admin');
+        $user->setLastName('admin');
+        // encodePassword => hash du mot de passe
+        $user->setPassword($this->encoder->encodePassword($user, 'S3cr3T+'));
+        //on sauvegarde en bdd tout de suite
+        $manager->persist($user);
+
         $manager->flush();
 
 /***********USERS FIN************/
@@ -85,13 +85,17 @@ class AppFixtures extends Fixture
         $manager->persist($order_status);
         $manager->flush();
 
-        //Création des commandes fictives
-        $order = new Orders();
+        //Récup des repos user, status et product pour avoir accès aux autres tables via les FK
         $user = $manager->getRepository(User::class);
         $status = $manager->getRepository(OrderStatus::class);
+        $product = $manager->getRepository(Product::class);
+
+        //Création des commandes fictives suite à la récup des repo
+        $order = new Orders();
         $order->setUserId($user->find(1));
         $order->setStatus($status->find(1));
-        $order->setDate(new \DateTime('2019-09-02 18:23:32'));
+        $order->setDate(new \DateTime('2019-09-02 17:02:53'));
+        $order->setProductsId($product->find(1));
         $manager->persist($order);
         $manager->flush();
 /***********ORDERS FIN************/

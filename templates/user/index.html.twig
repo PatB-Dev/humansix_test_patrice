@@ -1,6 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+<ul>
+    {% for product in products %}
+    <li>{{ product.name }}</li>
+    <li>{{ product.sku }}</li>
+    {% endfor %}
+</ul>
+
 <button>
     <a href="{{ url('app_logout')}}">DECONNEXION</a>
 </button>
