@@ -2,14 +2,14 @@
 
 {% block body %}
 
-<ul>
-    {% for product in products %}
-    <li>{{ product.name }}</li>
-    <li>{{ product.sku }}</li>
-    {% endfor %}
-</ul>
+    <ul>
+        {% for product in products %}
+            <li>{{ product.name }}</li>
+        {% endfor %}
+    </ul>
 
-<button>
-    <a href="{{ url('app_logout')}}">DECONNEXION</a>
-</button>
+
+    <button>
+        <a href="{{ url('app_logout')}}">DECONNEXION</a>
+    </button>
 {% endblock %}

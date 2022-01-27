@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Orders;
+use App\Entity\Order;
 use App\Entity\OrderStatus;
 use App\Entity\Product;
 use App\Entity\User;
@@ -91,11 +91,15 @@ class AppFixtures extends Fixture
         $product = $manager->getRepository(Product::class);
 
         //Création des commandes fictives suite à la récup des repo
-        $order = new Orders();
-        $order->setUserId($user->find(1));
-        $order->setStatus($status->find(1));
-        $order->setDate(new \DateTime('2019-09-02 17:02:53'));
-        $order->setProductsId($product->find(1));
+        $order = new Order();
+//        $order->setUserId($user->find(1));
+        $order->setUserId(1);
+//        $order->setStatus($status->find(1));
+        $order->setStatus(1);
+        $order->setDateCreated(new \DateTime('2019-09-02 17:02:53'));
+//        $order->setProductId($product->find(1));
+        $order->setProductId(1);
+        $order->setPrice(20.00);
         $manager->persist($order);
         $manager->flush();
 /***********ORDERS FIN************/
