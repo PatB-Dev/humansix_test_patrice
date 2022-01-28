@@ -4,7 +4,7 @@ namespace App\Controller;
 
 
 
-use App\Entity\Product;
+use App\Entity\Order;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,9 +23,9 @@ class UserController extends AbstractController
         //Check user connecté?
         $user = $this->getUser();
         if($user){
-            $product = $em->getRepository(Product::class)->findAll();
+            $orders = $em->getRepository(Order::class)->findAll();
 
-            return $this->render('user/index.html.twig', ['products' => $product]);
+            return $this->render('user/index.html.twig', ['orders' => $orders]);
         }
         //Si non connecté retour à la page de connexion
         return $this->redirectToRoute('app_login');

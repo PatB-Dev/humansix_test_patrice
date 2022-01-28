@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OrderRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,19 +21,9 @@ class Order
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $userId;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $dateCreated;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $status;
 
     /**
      * @ORM\Column(type="float")
@@ -39,25 +31,24 @@ class Order
     private $price;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="orders")
      */
-    private $productId;
+    private $product;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="orders")
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->product = new ArrayCollection();
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUserId(): ?int
-    {
-        return $this->userId;
-    }
-
-    public function setUserId(int $userId): self
-    {
-        $this->userId = $userId;
-
-        return $this;
     }
 
     public function getDateCreated(): ?\DateTimeInterface
@@ -68,18 +59,6 @@ class Order
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
         $this->dateCreated = $dateCreated;
-
-        return $this;
-    }
-
-    public function getStatus(): ?int
-    {
-        return $this->status;
-    }
-
-    public function setStatus(int $status): self
-    {
-        $this->status = $status;
 
         return $this;
     }
@@ -96,15 +75,55 @@ class Order
         return $this;
     }
 
-    public function getProductId(): ?int
+    /**
+     * @return Collection|Product[]
+     */
+    public function getProduct(): Collection
     {
-        return $this->productId;
+        return $this->product;
     }
 
-    public function setProductId(int $productId): self
+    public function addProduct(Product $product): self
     {
-        $this->productId = $productId;
+        if (!$this->product->contains($product)) {
+            $this->product[] = $product;
+        }
 
         return $this;
     }
+
+    public function removeProduct(Product $product): self
+    {
+        $this->product->removeElement($product);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addOrder($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeOrder($this);
+        }
+
+        return $this;
+    }
+
 }

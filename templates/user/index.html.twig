@@ -3,13 +3,24 @@
 {% block body %}
 
     <ul>
-        {% for product in products %}
-            <li>{{ product.name }}</li>
+        {% for order in orders %}
+            <li>Commande n° {{ order.id }}</li>
+            {% for user in order.getUsers %}
+                <p> Prénom : {{ user.firstName}} <br> Nom : {{ user.lastName }}</p>
+            {% endfor %}
+            Date de création : {{ order.dateCreated | date("d/m/Y")}}
+            {% for product in order.getProduct%}
+                <li>Produit:  {{ product.name}} <br> Prix :  {{ product.price | number_format(2)}}€ </li>
+            {% endfor %}
+            <br>
         {% endfor %}
     </ul>
 
-
+    <button>
+        <a href="#">Création d'un commande</a>
+    </button>
     <button>
         <a href="{{ url('app_logout')}}">DECONNEXION</a>
     </button>
+
 {% endblock %}
