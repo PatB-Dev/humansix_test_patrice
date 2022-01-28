@@ -4,7 +4,7 @@
 
     <ul>
         {% for order in orders %}
-            <li>Commande n° {{ order.id }}</li>
+            <li>Commande n° {{ order.id }} {{ order.status }}</li>
 
             {% for user in order.getUsers %}
                 <p> Prénom : {{ user.firstName}} <br> Nom : {{ user.lastName }}</p>

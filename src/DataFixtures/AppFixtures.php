@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Order;
-use App\Entity\OrderStatus;
+use App\Entity\Status;
 use App\Entity\Product;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -79,18 +79,18 @@ class AppFixtures extends Fixture
 
 /***********ORDERS************/
         //Création des status des commandes
-        $order_status = new OrderStatus();
+        $order_status = new Status();
         $order_status->setName('processing');
         $manager->persist($order_status);
 
-        $order_status = new OrderStatus();
+        $order_status = new Status();
         $order_status->setName('canceled');
         $manager->persist($order_status);
         $manager->flush();
 
         //Récup des repos user, status et product pour avoir accès aux autres tables via les FK
         $user = $manager->getRepository(User::class);
-        $status = $manager->getRepository(OrderStatus::class);
+        $status = $manager->getRepository(Status::class);
         $product = $manager->getRepository(Product::class);
 
         //Création des commandes fictives suite à la récup des repo

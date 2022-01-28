@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\OrderStatus;
+use App\Entity\Status;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method OrderStatus|null find($id, $lockMode = null, $lockVersion = null)
- * @method OrderStatus|null findOneBy(array $criteria, array $orderBy = null)
- * @method OrderStatus[]    findAll()
- * @method OrderStatus[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Status|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Status|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Status[]    findAll()
+ * @method Status[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class OrderStatusRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, OrderStatus::class);
+        parent::__construct($registry, Status::class);
     }
 
     // /**
-    //  * @return OrderStatus[] Returns an array of OrderStatus objects
+    //  * @return Status[] Returns an array of Status objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class OrderStatusRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?OrderStatus
+    public function findOneBySomeField($value): ?Status
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.exampleField = :val')
