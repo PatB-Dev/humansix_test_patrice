@@ -1,24 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Order index{% endblock %}
-
 {% block body %}
-    <h1>Order index</h1>
+    <h1>Commandes</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>DateCreated</th>
-                <th>Price</th>
-                <th>actions</th>
+                <th>N°</th>
+                <th>Nom</th>
+                <th>Date de Création</th>
+                <th>Prix</th>
+                <th>Modification</th>
             </tr>
         </thead>
         <tbody>
         {% for order in orders %}
             <tr>
                 <td>{{ order.id }}</td>
-                <td>{{ order.dateCreated ? order.dateCreated|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ order.users | first }}</td>
+                <td>{{ order.dateCreated ? order.dateCreated|date('d-m-Y H:i:s') : '' }}</td>
                 <td>{{ order.price }}</td>
                 <td>
                     <a href="{{ path('order_show', {'id': order.id}) }}">show</a>
@@ -33,5 +33,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('order_new') }}">Create new</a>
+    <a href="{{ path('order_new') }}">Nouvelle commande</a>
+    <br><br>
+    <button>
+        <a href="{{ url('app_logout')}}">DECONNEXION</a>
+    </button>
 {% endblock %}

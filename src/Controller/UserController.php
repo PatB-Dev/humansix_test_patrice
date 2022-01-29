@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route(path="/monprofil", name="profil", methods={"GET", "POST"})
+     * @Route(path="", name="profil", methods={"GET", "POST"})
      */
     public function index(EntityManagerInterface $em)
     {
@@ -23,9 +23,8 @@ class UserController extends AbstractController
         //Check user connecté?
         $user = $this->getUser();
         if($user){
-            $orders = $em->getRepository(Order::class)->findAll();
 
-            return $this->render('user/index.html.twig', ['orders' => $orders]);
+            return $this->render('order_index');
         }
         //Si non connecté retour à la page de connexion
         return $this->redirectToRoute('app_login');
