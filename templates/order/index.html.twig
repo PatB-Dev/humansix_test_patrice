@@ -10,6 +10,7 @@
                 <th>Nom</th>
                 <th>Date de Création</th>
                 <th>Prix</th>
+                <th>Status</th>
                 <th>Modification</th>
             </tr>
         </thead>
@@ -19,7 +20,8 @@
                 <td>{{ order.id }}</td>
                 <td>{{ order.users | first }}</td>
                 <td>{{ order.dateCreated ? order.dateCreated|date('d-m-Y H:i:s') : '' }}</td>
-                <td>{{ order.price }}</td>
+                <td>{{ order.price | number_format(2) }}€</td>
+                <td>{{ order.status }}</td>
                 <td>
                     <a href="{{ path('order_show', {'id': order.id}) }}">show</a>
                     <a href="{{ path('order_edit', {'id': order.id}) }}">edit</a>
