@@ -5,11 +5,15 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Form\OrderType;
 use App\Repository\OrderRepository;
+use DateTime;
+use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
+
 
 /**
  * @Route("/order")
@@ -32,6 +36,7 @@ class OrderController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $order = new Order();
+        $order->setDateCreated(new DateTime('now', new DateTimeZone('EUROPE/Paris')));
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
 
