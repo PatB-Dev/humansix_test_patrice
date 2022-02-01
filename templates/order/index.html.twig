@@ -10,8 +10,8 @@
             <th>Nom</th>
             <th>Date de Création</th>
             <th>Status</th>
+            <th>Total</th>
             <th>Modification</th>
-            <th>Somme</th>
         </tr>
         </thead>
         <tbody>
@@ -23,11 +23,11 @@
                 <td>{{ order.dateCreated ? order.dateCreated|date('d-m-Y H:i:s') : '' }}</td>
                 <td>{{ order.status }}</td>
                 <td>
-                    <a href="{{ path('order_show', {'id': order.id}) }}">show</a>
-                    <a href="{{ path('order_edit', {'id': order.id}) }}">edit</a>
+                    {{ total[loop.index0] |number_format(2) }}€
                 </td>
                 <td>
-                    {{ total[loop.index0] |number_format(2) }}€
+                    <a href="{{ path('order_show', {'id': order.id}) }}">show</a>
+                    <a href="{{ path('order_edit', {'id': order.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

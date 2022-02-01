@@ -24,7 +24,6 @@ class AppFixtures extends Fixture
     {
 
 
-
 /***********PRODUCTS************/
         //charge le fichier sql pour insertion des produits
         $sql = file_get_contents(__DIR__ . '/insert_products.sql');
@@ -100,7 +99,7 @@ class AppFixtures extends Fixture
         $order->setStatus(1);
         $order->setDateCreated(new \DateTime('2019-09-02 17:02:53'));
 //        $order->setProductId($product->find(1));
-        $order->setPrice(20.00);
+
         $manager->persist($order);
         $manager->flush();
 /***********ORDERS FIN************/
