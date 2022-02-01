@@ -19,7 +19,6 @@ class UserController extends AbstractController
      */
     public function index(EntityManagerInterface $em)
     {
-
         //Check user connecté?
         $user = $this->getUser();
         if($user){

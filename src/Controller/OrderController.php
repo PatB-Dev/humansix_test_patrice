@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Order;
+use App\Entity\User;
 use App\Form\OrderType;
 use App\Repository\OrderRepository;
 use DateTime;
@@ -25,8 +26,18 @@ class OrderController extends AbstractController
      */
     public function index(OrderRepository $orderRepository): Response
     {
+        $total = array();
+        foreach ($orderRepository->findAll() as $order){
+            $sum = 0;
+            foreach ($order->getProduct() as $product){
+                $sum += $product->getPrice();
+            }
+            array_push($total, $sum);
+        }
+
         return $this->render('order/index.html.twig', [
             'orders' => $orderRepository->findAll(),
+            'total' => $total
         ]);
     }
 
@@ -37,10 +48,12 @@ class OrderController extends AbstractController
     {
         $order = new Order();
         $order->setDateCreated(new DateTime('now', new DateTimeZone('EUROPE/Paris')));
+
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $order->addUser($entityManager->getRepository(User::class)->find($this->getUser()));
             $entityManager->persist($order);
             $entityManager->flush();
 

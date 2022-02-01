@@ -12,12 +12,12 @@
                 <td>{{ order.id }}</td>
             </tr>
             <tr>
-                <th>DateCreated</th>
+                <th>Date de création</th>
                 <td>{{ order.dateCreated ? order.dateCreated|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Price</th>
-                <td>{{ order.price }}</td>
+                <th>Prix</th>
+                <td>{{ order.price }}€</td>
             </tr>
         </tbody>
     </table>

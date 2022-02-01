@@ -25,10 +25,6 @@ class Order
      */
     private $dateCreated;
 
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $price;
 
     /**
      * @ORM\ManyToMany(targetEntity=Product::class, inversedBy="orders")
@@ -65,18 +61,6 @@ class Order
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
         $this->dateCreated = $dateCreated;
-
-        return $this;
-    }
-
-    public function getPrice(): ?float
-    {
-        return $this->price;
-    }
-
-    public function setPrice(float $price): self
-    {
-        $this->price = $price;
 
         return $this;
     }

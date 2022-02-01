@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Order;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use PhpParser\Node\Expr\Cast\Object_;
+use Symfony\Component\Validator\Constraints\Collection;
 
 /**
  * @method Order|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,4 +21,12 @@ class OrderRepository extends ServiceEntityRepository
         parent::__construct($registry, Order::class);
     }
 
+//    public function getProduct(OrderRepository $orderRepository){
+//        $total = array();
+//        foreach ($orderRepository->findAll() as $order){
+//            foreach ($order->getProduct() as $product){
+//                var_dump($product->getPrice());
+//            }
+//        }
+//    }
 }

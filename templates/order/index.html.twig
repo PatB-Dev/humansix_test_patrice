@@ -5,31 +5,34 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>N°</th>
-                <th>Nom</th>
-                <th>Date de Création</th>
-                <th>Prix</th>
-                <th>Status</th>
-                <th>Modification</th>
-            </tr>
+        <tr>
+            <th>N°</th>
+            <th>Nom</th>
+            <th>Date de Création</th>
+            <th>Status</th>
+            <th>Modification</th>
+            <th>Somme</th>
+        </tr>
         </thead>
         <tbody>
+
         {% for order in orders %}
             <tr>
                 <td>{{ order.id }}</td>
                 <td>{{ order.users | first }}</td>
                 <td>{{ order.dateCreated ? order.dateCreated|date('d-m-Y H:i:s') : '' }}</td>
-                <td>{{ order.price | number_format(2) }}€</td>
                 <td>{{ order.status }}</td>
                 <td>
                     <a href="{{ path('order_show', {'id': order.id}) }}">show</a>
                     <a href="{{ path('order_edit', {'id': order.id}) }}">edit</a>
                 </td>
+                <td>
+                    {{ total[loop.index0] |number_format(2) }}€
+                </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Pas de commande</td>
             </tr>
         {% endfor %}
         </tbody>
