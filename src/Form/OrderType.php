@@ -13,7 +13,6 @@ class OrderType extends AbstractType
     {
         $builder
             ->add('product')
-            ->add('users')
             ->add('status')
         ;
     }

@@ -98,8 +98,31 @@ class AppFixtures extends Fixture
         $order->setDateCreated(new \DateTime('2019-09-02 17:02:53'));
         $order->addUser($user->find(1));
         $order->addProduct($product->find(1));
-
         $manager->persist($order);
+
+        $order = new Order();
+        $order->setStatus($status->find(1));
+        $order->setDateCreated(new \DateTime('2019-09-02 18:23:32'));
+        $order->addUser($user->find(1));
+        $order->addProduct($product->find(2));
+        $order->addProduct($product->find(3));
+        $manager->persist($order);
+
+        $order = new Order();
+        $order->setStatus($status->find(1));
+        $order->setDateCreated(new \DateTime('2019-09-04 10:32:51'));
+        $order->addUser($user->find(2));
+        $order->addProduct($product->find(2));
+        $order->addProduct($product->find(4));
+        $manager->persist($order);
+
+        $order = new Order();
+        $order->setStatus($status->find(2));
+        $order->setDateCreated(new \DateTime('2019-09-05 08:54:22'));
+        $order->addUser($user->find(3));
+        $order->addProduct($product->find(1));
+        $manager->persist($order);
+
         $manager->flush();
 /***********ORDERS FIN************/
 
