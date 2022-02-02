@@ -1,13 +1,13 @@
 # humansix test technique
 https://github.com/humansix/test-technique
 
-Framwork: Symfony (+twig)
+Framework: Symfony (+twig)
 
 BDD: MySQL (Wamp)
 
 Logiciel: PHPStorm (IntelliJ)
 
-Intallation du projet => à copier/coller dans le Terminal dans le dossier du projet:
+Installation du projet => à copier/coller dans le Terminal dans le dossier du projet:
 
 composer update
 
